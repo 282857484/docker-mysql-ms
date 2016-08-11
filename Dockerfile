@@ -33,7 +33,6 @@ RUN cd $MYSQL_HOME \
     && chown -Rf mysql:mysql $MYSQL_HOME \
     && chmod 755 -Rf $MYSQL_HOME \
     && rm -rf /etc/my.cnf 
-#  && /usr/sbin/mysqld --initialize-insecure --basedir=$MYSQL_HOME --datadir=$MYSQL_HOME/data --user=mysql
 
 VOLUME ["/aifs01/dbdata"]
 WORKDIR $MYSQL_HOME
