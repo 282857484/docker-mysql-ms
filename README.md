@@ -9,8 +9,9 @@
 
 运行命令：
 ## master run:
-docker run -d --net=host -p 39008:39008 -v /aifs01/dbdata:/percona/data -e "PORT=39008" -e "START_MODE=master" 10.1.245.4:5000/mysql-replication:5.7.13
+docker run --name image-test-master -d --net=host -p 7777:7777  -v /aifs01/dbdata/7777:/percona/data --cpuset-cpus=0 --memory-reservation 1G -e "PORT=7777" -e "START_MODE=master" -e "DB_ROOT_NAME=rootusr" -e "DB_ROOT_PASSWORD=123456" -e "DB_WHITE_LIST=10.1.*.*,192.168.*.*,%.%.%.%" -e "BANDWIDTH=4" -e "SQL_AUDIT=on" -e "SYNC_STRATEGY=semisynchronous" -e "SERVER_ID=1" 10.1.245.4:5000/mysql-replication-20:5.7.13
 
 ## slave run:
-docker run -d --net=host -p 39009:39009 -v /aifs01/dbdata:/percona/data -e "PORT=39009" -e "START_MODE=slave" -e "MASTER_HOST=10.1.245.225" -e "MASTER_PORT=39008" 10.1.245.4:5000/mysql-replication:5.7.13
+docker run --name image-test-slave -d --net=host -p 8888:8888  -v /aifs01/dbdata/8888:/percona/data --cpuset-cpus=1 --memory-reservation 1G -e "PORT=8888" -e "START_MODE=slave" -e "DB_ROOT_NAME=rootusr" -e "DB_ROOT_PASSWORD=123456" -e "DB_WHITE_LIST=10.1.*.*,192.168.*.*,%.%.%.%" -e "BANDWIDTH=4" -e "MASTER_HOST=10.1.245.226" -e "MASTER_PORT=7777"    -e "SQL_AUDIT=on" -e "SYNC_STRATEGY=semisynchronous" -e "SERVER_ID=2" 10.1.245.4:5000/mysql-replication-20:5.7.13
+
 
