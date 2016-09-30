@@ -52,6 +52,8 @@ COPY bakmaster_switch.sql /bakmaster_switch.sql
 COPY master_switch.sql /master_switch.sql
 COPY slave_switch.sql /slave_switch.sql
 RUN chmod 777 /switch.sh 
+RUN /bin/cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+	&& echo 'Asia/Shanghai' > /etc/timezone
 ####ADD 20160908 10:45 HB e
 
 VOLUME ["/aifs01/dbdata"]
