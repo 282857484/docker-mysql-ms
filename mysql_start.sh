@@ -7,7 +7,7 @@ doCommand="mysql -uroot --socket=${MYSQL_HOME}/mysqld-${PORT}.sock"
 sed -i "s%port=3306%port=${PORT}%g" ${MYSQL_HOME}/my.cnf
 sed -i "s%socket=.*%socket=${MYSQL_HOME}\/mysqld-${PORT}.sock%g" ${MYSQL_HOME}/my.cnf
 sed -i "s%pid-file=.*%pid-file=${MYSQL_HOME}\/mysql-${PORT}.pid%g" ${MYSQL_HOME}/my.cnf
-sed -i "s%log-error=.*%log-error=${MYSQL_HOME}\/mysql-${PORT}.err%g" ${MYSQL_HOME}/my.cnf
+sed -i "s%log-error=.*%log-error=${MYSQL_HOME}\/data\/mysql-${PORT}.err%g" ${MYSQL_HOME}/my.cnf
 sed -i "s%server-id=1%server-id=${SERVER_ID}%g" ${MYSQL_HOME}/my.cnf
 
 if [ ! -f "$lockFile" ]; then
